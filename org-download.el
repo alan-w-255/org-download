@@ -434,7 +434,7 @@ The screenshot tool is determined by `org-download-screenshot-method'."
 
 (defvar org-download-annotate-function
   #'org-download-annotate-default
-  "Function that takes LINK and returns a string.
+  "Function that takes LINK and FILENAME, returns a string.
 It's inserted before the image link and is used to annotate it.")
 
 (defvar org-download-link-format
@@ -570,7 +570,7 @@ It's inserted before the image link and is used to annotate it.")
     (if (looking-back "^[ \t]+" line-beg)
         (delete-region (match-beginning 0) (match-end 0))
       (newline))
-    (insert (funcall org-download-annotate-function link))
+    (insert (funcall org-download-annotate-function link filename))
     (dolist (attr org-download-image-attr-list)
       (insert attr "\n"))
     (insert (if (= org-download-image-html-width 0)
